@@ -15,6 +15,7 @@ import MyCampaign from './Layout/MyCampaign';
 import MyDonation from './Layout/MyDonation';
 import Login from './Component/Login';
 import Register from './Component/Register';
+import AuthProvider from './Auth/AuthProvider';
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,8 @@ const router = createBrowserRouter([
 ]);
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-   <RouterProvider router={router} />
+ <AuthProvider>
+    <RouterProvider router={router} />
+ </AuthProvider>
   </StrictMode>,
 )

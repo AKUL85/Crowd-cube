@@ -1,10 +1,21 @@
+import { useAuth } from "../Auth/AuthProvider";
 
 
 const Login = () => {
-  
+      const {signInWithEmailPassword}=useAuth()
 
   const handleLogin = (e) => {
+
     e.preventDefault();
+     const email=e.target.email.value ;
+    const password=e.target.email.value ;
+    signInWithEmailPassword(email,password)
+    .then(res=>{
+      console.log(res);
+    })
+    .catch(error=>{
+      console.log(error.message);
+    })
     
   };
 
