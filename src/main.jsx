@@ -8,11 +8,46 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Root from './Root';
+import Home from './Layout/Home';
+import AllCampaign from './Layout/AllCampaign';
+import AddCampaign from './Layout/AddCampaign';
+import MyCampaign from './Layout/MyCampaign';
+import MyDonation from './Layout/MyDonation';
+import Login from './Component/Login';
+import Register from './Component/Register';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
+    children:[
+      {
+        path:"/",
+        element:<Home></Home>
+      },
+      {
+        path:'/campaigns',
+        element:<AllCampaign></AllCampaign>
+      },
+      {
+        path:'/add-campaign',
+        element:<AddCampaign></AddCampaign>
+      },
+      {
+        path:'/my-campaigns',
+        element:<MyCampaign></MyCampaign>
+      },
+      {
+        path:'my-donations',
+        element:<MyDonation></MyDonation>
+      },{
+        path:'/login',
+        element:<Login></Login>
+      },{
+        path:'/register',
+        element:<Register></Register>
+      }
+    ]
   },
 ]);
 createRoot(document.getElementById('root')).render(
