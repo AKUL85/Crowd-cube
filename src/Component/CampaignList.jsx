@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { motion } from 'framer-motion';
 import CampaignCard from './CampaignCard';
 
@@ -39,7 +39,7 @@ const CampaignList = ({ campaigns }) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: index * 0.1, duration: 0.6 }}
         >
-          <CampaignCard campaign={campaign} />
+          <CampaignCard campaign={campaign} key={campaign.id} />
         </motion.div>
       ))}
     </div>

@@ -11,12 +11,14 @@ import Root from './Root';
 import Home from './Layout/Home';
 import AllCampaign from './Layout/AllCampaign';
 import AddCampaign from './Layout/AddCampaign';
-import MyCampaign from './Layout/MyCampaign';
+
 import MyDonation from './Layout/MyDonation';
 import Login from './Component/Login';
 import Register from './Component/Register';
 import AuthProvider from './Auth/AuthProvider';
 import { ThemeProvider } from './Auth/ThemeProvider';
+import MyCampaigns from './Layout/MyCampaigns';
+import CampaignDetails from './Layout/CampaignDetails';
 
 const router = createBrowserRouter([
   {
@@ -39,7 +41,7 @@ const router = createBrowserRouter([
       },
       {
         path:'/my-campaigns',
-        element:<MyCampaign></MyCampaign>
+        element:<MyCampaigns></MyCampaigns>
       },
       {
         path:'my-donations',
@@ -50,6 +52,9 @@ const router = createBrowserRouter([
       },{
         path:'/register',
         element:<Register></Register>
+      },{
+        path:"/campaign/:id",
+        element:<CampaignDetails></CampaignDetails>
       }
     ]
   },
