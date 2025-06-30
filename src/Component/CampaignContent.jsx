@@ -35,7 +35,7 @@ const CampaignContent = ({ campaign, donations }) => {
           <div className="space-y-4">
             {donations.slice(0, 5).map((donation) => (
               <div
-                key={donation.id}
+                key={donation._id}
                 className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg"
               >
                 <div>

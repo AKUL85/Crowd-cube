@@ -19,7 +19,7 @@ const CampaignTable = ({ campaigns, onView, onUpdate, onDelete }) => {
           <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
             {campaigns.map((campaign, index) => (
               <CampaignTableRow
-                key={campaign.id}
+                key={campaign._id}
                 campaign={campaign}
                 index={index}
                 onView={onView}
