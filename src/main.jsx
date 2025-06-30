@@ -19,6 +19,7 @@ import AuthProvider from './Auth/AuthProvider';
 import { ThemeProvider } from './Auth/ThemeProvider';
 import MyCampaigns from './Layout/MyCampaigns';
 import CampaignDetails from './Layout/CampaignDetails';
+import UpdateCampaign from './Layout/UpdateCampaign';
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,9 @@ const router = createBrowserRouter([
       },{
         path:"/campaign/:id",
         element:<CampaignDetails></CampaignDetails>
+      },{
+        path:"/update-campaign/:id",
+        element:<UpdateCampaign></UpdateCampaign>
       }
     ]
   },

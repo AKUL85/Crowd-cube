@@ -1,21 +1,48 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Type, Tag, DollarSign, Image as ImageIcon, Calendar, FileText } from 'react-feather';
 
-const AddCampaign = () => {
+const UpdateCampaign = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
   const [loading, setLoading] = useState(false);
+  const [fetching, setFetching] = useState(true);
   const [formData, setFormData] = useState({
     title: '',
     type: 'personal',
     description: '',
     minimumDonation: '',
-    
     image: '',
-  
     deadline: ''
   });
+
+  
+  useEffect(() => {
+    const fetchCampaign = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/Campaign/${id}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch campaign');
+        }
+        const data = await response.json();
+        setFormData({
+          title: data.title,
+          type: data.type,
+          description: data.description,
+          minimumDonation: data.minimumDonation,
+          image: data.image,
+          deadline: data.deadline.split('T')[0] 
+        });
+      } catch (error) {
+        console.error('Error fetching campaign:', error);
+      } finally {
+        setFetching(false);
+      }
+    };
+
+    fetchCampaign();
+  }, [id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,14 +61,12 @@ const AddCampaign = () => {
       type: formData.type,
       description: formData.description,
       minimumDonation: formData.minimumDonation,
-    
       image: formData.image,
-      
       deadline: formData.deadline
     };
 
-    fetch('http://localhost:5000/Campaign', {
-      method: 'POST',
+    fetch(`http://localhost:5000/Campaign/${id}`, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -63,11 +88,21 @@ const AddCampaign = () => {
     });
   };
 
-  
   const user = {
     name: 'Akul Biswas',
     email: 'biswasakul287@gmail.com'
   };
+
+  if (fetching) {
+    return (
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mx-auto"></div>
+          <p className="mt-4 text-gray-700 dark:text-gray-300">Loading campaign data...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
@@ -79,10 +114,10 @@ const AddCampaign = () => {
           className="mb-8"
         >
           <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-            Create New Campaign
+            Update Campaign
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-400">
-            Share your story and start raising funds for your cause
+            Edit your campaign details and save changes
           </p>
         </motion.div>
 
@@ -272,7 +307,7 @@ const AddCampaign = () => {
                 disabled={loading}
                 className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
               >
-                {loading ? 'Creating Campaign...' : 'Create Campaign'}
+                {loading ? 'Updating Campaign...' : 'Update Campaign'}
               </motion.button>
             </div>
           </form>
@@ -282,4 +317,4 @@ const AddCampaign = () => {
   );
 };
 
-export default AddCampaign;
+export default UpdateCampaign;
