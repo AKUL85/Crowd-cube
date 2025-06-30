@@ -8,7 +8,7 @@ const DonationsList = ({ donations }) => {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {donations.map((donation, index) => (
         <motion.div
-          key={donation.id}
+          key={donation._id || index}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: index * 0.1, duration: 0.6 }}
@@ -18,12 +18,14 @@ const DonationsList = ({ donations }) => {
             <div className="relative h-48">
               <img
                 src={donation.campaign.image}
-                alt={donation.campaignTitle}
+                alt={donation.campaign.title}
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
               <div className="absolute bottom-4 left-4 right-4">
-                <h3 className="text-white font-bold text-lg line-clamp-2">{donation.campaignTitle}</h3>
+                <h3 className="text-white font-bold text-lg line-clamp-2">
+                  {donation.campaign.title}
+                </h3>
               </div>
             </div>
           )}
@@ -31,12 +33,16 @@ const DonationsList = ({ donations }) => {
           <div className="p-6 space-y-4">
             <div className="flex justify-between items-center">
               <span className="text-sm text-gray-600 dark:text-gray-400">Donation Amount</span>
-              <span className="text-2xl font-bold text-green-600 dark:text-green-400">${donation.amount}</span>
+              <span className="text-2xl font-bold text-green-600 dark:text-green-400">
+                ${donation.amount}
+              </span>
             </div>
 
             <div className="flex justify-between items-center">
               <span className="text-sm text-gray-600 dark:text-gray-400">Date</span>
-              <span className="text-sm font-medium text-gray-900 dark:text-gray-100">{new Date(donation.donatedAt).toLocaleDateString()}</span>
+              <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                {new Date(donation.donatedAt).toLocaleDateString()}
+              </span>
             </div>
 
             {donation.campaign && (
@@ -55,13 +61,23 @@ const DonationsList = ({ donations }) => {
             )}
 
             <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
-              <Link
-                to={`/campaign/${donation.campaignId}`}
-                className="flex items-center justify-center space-x-2 w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-              >
-                <span>View Campaign</span>
-                <ExternalLink className="h-4 w-4" />
-              </Link>
+              {donation.campaign ? (
+                <Link
+                  to={`/campaign/${donation.campaign._id}`}
+                  className="flex items-center justify-center space-x-2 w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  <span>View Campaign</span>
+                  <ExternalLink className="h-4 w-4" />
+                </Link>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => alert('This campaign has ended or is no longer available.')}
+                  className="flex items-center justify-center space-x-2 w-full px-4 py-2 bg-gray-400 text-white rounded-lg cursor-not-allowed"
+                >
+                  <span>Campaign Ended</span>
+                </button>
+              )}
             </div>
           </div>
         </motion.div>
