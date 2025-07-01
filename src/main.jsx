@@ -11,7 +11,6 @@ import Root from './Root';
 import Home from './Layout/Home';
 import AllCampaign from './Layout/AllCampaign';
 import AddCampaign from './Layout/AddCampaign';
-
 import MyDonation from './Layout/MyDonation';
 import Login from './Component/Login';
 import Register from './Component/Register';
@@ -20,6 +19,7 @@ import { ThemeProvider } from './Auth/ThemeProvider';
 import MyCampaigns from './Layout/MyCampaigns';
 import CampaignDetails from './Layout/CampaignDetails';
 import UpdateCampaign from './Layout/UpdateCampaign';
+import { Toaster } from 'react-hot-toast';  // ✅ import it
 
 const router = createBrowserRouter([
   {
@@ -33,8 +33,6 @@ const router = createBrowserRouter([
       {
         path:'/campaigns',
         element:<AllCampaign></AllCampaign>,
-        
-        
       },
       {
         path:'/add-campaign',
@@ -47,28 +45,36 @@ const router = createBrowserRouter([
       {
         path:'my-donations',
         element:<MyDonation></MyDonation>
-      },{
+      },
+      {
         path:'/login',
         element:<Login></Login>
-      },{
+      },
+      {
         path:'/register',
         element:<Register></Register>
-      },{
+      },
+      {
         path:"/campaign/:id",
         element:<CampaignDetails></CampaignDetails>
-      },{
+      },
+      {
         path:"/update-campaign/:id",
         element:<UpdateCampaign></UpdateCampaign>
       }
     ]
   },
 ]);
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
- <ThemeProvider>
-  <AuthProvider>
-    <RouterProvider router={router} />
- </AuthProvider>
- </ThemeProvider>
-  </StrictMode>,
+    <ThemeProvider>
+      <AuthProvider>
+        <>
+          <RouterProvider router={router} />
+          <Toaster position="top-center" reverseOrder={false} /> 
+        </>
+      </AuthProvider>
+    </ThemeProvider>
+  </StrictMode>
 )

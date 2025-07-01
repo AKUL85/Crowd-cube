@@ -106,10 +106,10 @@ const CampaignDetails = () => {
         const donationRes = await fetch(`https://crowd-cube-server-2.onrender.com/Donation/${campaign._id}`);
         const donationsList = await donationRes.json();
         setDonations(donationsList);
-
+        toast.success('Thank you for your donation!');
         setShowDonationModal(false);
         setDonationAmount('');
-        toast.success('Thank you for your donation!');
+        
       } else {
         toast.error('Donation failed. Please try again.');
       }
