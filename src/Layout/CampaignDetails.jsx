@@ -29,7 +29,7 @@ const CampaignDetails = () => {
 
     const fetchCampaign = async () => {
       try {
-        const res = await fetch(`https://myapp-seven-livid.vercel.app/Campaign/${id}`);
+        const res = await fetch(`https://crowd-cube-server-2.onrender.com/Campaign/${id}`);
         const data = await res.json();
         if (!data) {
           toast.error('Campaign not found');
@@ -38,7 +38,7 @@ const CampaignDetails = () => {
         }
         setCampaign(data);
 
-        const donationRes = await fetch(`https://myapp-seven-livid.vercel.app/Donation/${id}`);
+        const donationRes = await fetch(`https://crowd-cube-server-2.onrender.com/Donation/${id}`);
         const donationsData = await donationRes.json();
         setDonations(donationsData);
 
@@ -89,7 +89,7 @@ const CampaignDetails = () => {
         donatedAt: new Date().toISOString(),
       };
 
-      const res = await fetch('https://myapp-seven-livid.vercel.app/Donation', {
+      const res = await fetch('https://crowd-cube-server-2.onrender.com/Donation', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newDonation),
@@ -98,12 +98,12 @@ const CampaignDetails = () => {
       const data = await res.json();
       if (data.success) {
         // Refresh campaign
-        const updatedCampaignRes = await fetch(`https://myapp-seven-livid.vercel.app/Campaign/${campaign._id}`);
+        const updatedCampaignRes = await fetch(`https://crowd-cube-server-2.onrender.com/Campaign/${campaign._id}`);
         const updatedCampaign = await updatedCampaignRes.json();
         setCampaign(updatedCampaign);
 
         // Refresh donations
-        const donationRes = await fetch(`https://myapp-seven-livid.vercel.app/Donation/${campaign._id}`);
+        const donationRes = await fetch(`https://crowd-cube-server-2.onrender.com/Donation/${campaign._id}`);
         const donationsList = await donationRes.json();
         setDonations(donationsList);
 

@@ -40,7 +40,7 @@ const AddCampaign = () => {
       deadline: formData.deadline
     };
 
-    fetch('https://myapp-seven-livid.vercel.app/Campaign', {
+    fetch('https://crowd-cube-server-2.onrender.com/Campaign', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

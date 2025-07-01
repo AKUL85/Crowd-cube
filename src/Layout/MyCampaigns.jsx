@@ -19,7 +19,7 @@ const MyCampaigns = () => {
     if (!user) return;
 
     setLoading(true);
-    fetch(`https://myapp-seven-livid.vercel.app/Campaign?email=${user.email}`)
+    fetch(`https://crowd-cube-server-2.onrender.com/Campaign?email=${user.email}`)
       .then(res => res.json())
       .then(data => {
         setCampaigns(data);
@@ -44,7 +44,7 @@ const MyCampaigns = () => {
   const confirmDelete = () => {
     if (!deleteId) return;
 
-    fetch(`https://myapp-seven-livid.vercel.app/Campaign/${deleteId}`, {
+    fetch(`https://crowd-cube-server-2.onrender.com/Campaign/${deleteId}`, {
       method: 'DELETE',
     })
       .then((response) => response.json())

@@ -16,7 +16,7 @@ const AllCampaign= () => {
     const fetchCampaigns = async () => {
       setLoading(true);
       try {
-        const response = await fetch('https://myapp-seven-livid.vercel.app/Campaign');
+        const response = await fetch('https://crowd-cube-server-2.onrender.com/Campaign');
         const data = await response.json();
         setCampaigns(data);
         setFilteredCampaigns(data);

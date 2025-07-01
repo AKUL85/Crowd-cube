@@ -20,14 +20,14 @@ const MyDonations = () => {
 
     setLoading(true);
 
-    fetch('https://myapp-seven-livid.vercel.app/Donation') 
+    fetch('https://crowd-cube-server-2.onrender.com/Donation') 
         .then(res => res.json())
         .then(allDonations => {
             
             const userDonations = allDonations.filter(donation => donation.donorEmail === user.email);
 
             const enrichedPromises = userDonations.map(donation =>
-                fetch(`https://myapp-seven-livid.vercel.app/Campaign/${donation.campaignId}`)
+                fetch(`https://crowd-cube-server-2.onrender.com/Campaign/${donation.campaignId}`)
                     .then(res => res.json())
                     .then(campaign => ({ ...donation, campaign }))
                     .catch(() => ({ ...donation, campaign: null }))

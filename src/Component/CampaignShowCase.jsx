@@ -9,7 +9,7 @@ const CampaignShowCase = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('https://myapp-seven-livid.vercel.app/Campaign')
+    fetch('https://crowd-cube-server-2.onrender.com/Campaign')
       .then((res) => res.json())
       .then((data) => {
         setCampaigns(data);

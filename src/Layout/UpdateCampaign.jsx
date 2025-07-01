@@ -21,7 +21,7 @@ const UpdateCampaign = () => {
   useEffect(() => {
     const fetchCampaign = async () => {
       try {
-        const response = await fetch(`https://myapp-seven-livid.vercel.app/Campaign/${id}`);
+        const response = await fetch(`https://crowd-cube-server-2.onrender.com/Campaign/${id}`);
         if (!response.ok) {
           throw new Error('Failed to fetch campaign');
         }
@@ -65,7 +65,7 @@ const UpdateCampaign = () => {
       deadline: formData.deadline
     };
 
-    fetch(`https://myapp-seven-livid.vercel.app/Campaign/${id}`, {
+    fetch(`https://crowd-cube-server-2.onrender.com/Campaign/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
