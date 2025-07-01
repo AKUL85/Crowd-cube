@@ -19,7 +19,7 @@ const MyCampaigns = () => {
     if (!user) return;
 
     setLoading(true);
-    fetch(`http://localhost:5000/Campaign?email=${user.email}`)
+    fetch(`https://myapp-seven-livid.vercel.app/Campaign?email=${user.email}`)
       .then(res => res.json())
       .then(data => {
         setCampaigns(data);
@@ -44,7 +44,7 @@ const MyCampaigns = () => {
   const confirmDelete = () => {
     if (!deleteId) return;
 
-    fetch(`http://localhost:5000/Campaign/${deleteId}`, {
+    fetch(`https://myapp-seven-livid.vercel.app/Campaign/${deleteId}`, {
       method: 'DELETE',
     })
       .then((response) => response.json())

@@ -20,14 +20,14 @@ const MyDonations = () => {
 
     setLoading(true);
 
-    fetch('http://localhost:5000/Donation') 
+    fetch('https://myapp-seven-livid.vercel.app/Donation') 
         .then(res => res.json())
         .then(allDonations => {
             
             const userDonations = allDonations.filter(donation => donation.donorEmail === user.email);
 
             const enrichedPromises = userDonations.map(donation =>
-                fetch(`http://localhost:5000/campaign/${donation.campaignId}`)
+                fetch(`https://myapp-seven-livid.vercel.app/Campaign/${donation.campaignId}`)
                     .then(res => res.json())
                     .then(campaign => ({ ...donation, campaign }))
                     .catch(() => ({ ...donation, campaign: null }))

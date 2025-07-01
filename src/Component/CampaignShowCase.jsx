@@ -9,7 +9,7 @@ const CampaignShowCase = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:5000/Campaign')
+    fetch('https://myapp-seven-livid.vercel.app/Campaign')
       .then((res) => res.json())
       .then((data) => {
         setCampaigns(data);

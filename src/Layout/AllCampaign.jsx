@@ -16,7 +16,7 @@ const AllCampaign= () => {
     const fetchCampaigns = async () => {
       setLoading(true);
       try {
-        const response = await fetch('http://localhost:5000/Campaign');
+        const response = await fetch('https://myapp-seven-livid.vercel.app/Campaign');
         const data = await response.json();
         setCampaigns(data);
         setFilteredCampaigns(data);

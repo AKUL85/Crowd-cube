@@ -40,7 +40,7 @@ const AddCampaign = () => {
       deadline: formData.deadline
     };
 
-    fetch('http://localhost:5000/Campaign', {
+    fetch('https://myapp-seven-livid.vercel.app/Campaign', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
